@@ -21,12 +21,17 @@ export const Container = styled.div`
   border-radius: ${px2rem([8])};
 `;
 
-export const Text = styled.p`
+export const Text = styled.div`
   ${spacingStyles};
   ${textStyles};
 
   background: ${COLORS.GRAY_200};
   border-radius: ${px2rem([8])};
+
+  .md {
+    display: grid;
+    row-gap: ${px2rem(16)};
+  }
 `;
 
 export const CommentsCount = styled.div`

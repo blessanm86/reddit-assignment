@@ -6,7 +6,7 @@ import Post from "./components/Post";
 function App() {
   return (
     <Layout>
-      <Post />
+      <Post id="dfqxf8" />
     </Layout>
   );
 }

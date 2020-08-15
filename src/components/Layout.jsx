@@ -14,8 +14,8 @@ const globalStyles = css`
   }
 
   body {
+    margin: 0 calc(100vw - 100%);
     background: ${COLORS.GRAY_100};
-    margin: 0;
     font-family: arial;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -23,6 +23,14 @@ const globalStyles = css`
 
   h3 {
     font-size: ${px2rem(22)};
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
   }
 `;
 

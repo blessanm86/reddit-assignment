@@ -1,55 +1,75 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 
 import {
   Container,
   Comment,
   CommentMeta,
   StyledDeleteIcon,
+  DeleteButton,
   CommentText,
 } from "./Comments.styles";
+import {
+  formatNumberToK,
+  convertCommentsToTree,
+  getTimeDifferenceFromNowInWords,
+  convertStringToHtml,
+} from "../../../utils/ui";
 
-export default function Comments() {
+function renderCommentsTree(comments, onDelete) {
   return (
     <Container>
-      <Comment depth={0}>
-        <CommentMeta>
-          <a href="#">RandomName01</a>
-          <span>9.8k points - 8 hours ago</span>
-          <StyledDeleteIcon />
-        </CommentMeta>
-        <CommentText>Bruh</CommentText>
-      </Comment>
-      <Comment depth={0}>
-        <CommentMeta>
-          <a href="#">RandomName01</a>
-          <span>9.8k points - 8 hours ago</span>
-          <StyledDeleteIcon />
-        </CommentMeta>
-        <CommentText>
-          97% Disagree it's the most unpopular opinion I've seen here after that
-          guy who wanted to be pregnant
-        </CommentText>
-        <Container>
-          <Comment depth={1}>
+      {comments.map(
+        ({
+          id,
+          permalink,
+          depth,
+          author,
+          ups,
+          created_utc,
+          body_html,
+          children,
+        }) => (
+          <Comment depth={depth} key={id}>
             <CommentMeta>
-              <a href="#">RandomName01</a>
-              <span>9.8k points - 8 hours ago</span>
-              <StyledDeleteIcon />
+              <a href={permalink}>{author}</a>
+              <span>
+                {formatNumberToK(ups)} points -{" "}
+                {getTimeDifferenceFromNowInWords(created_utc * 1000)} ago
+              </span>
+              <DeleteButton
+                onClick={() => {
+                  onDelete(id);
+                }}
+              >
+                <StyledDeleteIcon />
+              </DeleteButton>
             </CommentMeta>
-            <CommentText>This is unpopular for a reason</CommentText>
-            <Container>
-              <Comment depth={2}>
-                <CommentMeta>
-                  <a href="#">RandomName01</a>
-                  <span>9.8k points - 8 hours ago</span>
-                  <StyledDeleteIcon />
-                </CommentMeta>
-                <CommentText>Hi there</CommentText>
-              </Comment>
-            </Container>
+            <CommentText
+              dangerouslySetInnerHTML={{
+                __html: convertStringToHtml(body_html),
+              }}
+            ></CommentText>
+            {children.length ? renderCommentsTree(children, onDelete) : null}
           </Comment>
-        </Container>
-      </Comment>
+        )
+      )}
     </Container>
   );
+}
+
+export default function Comments({ comments }) {
+  const [commentsFiltered, setCommentsFiltered] = useState(comments);
+  const commentsTree = convertCommentsToTree(commentsFiltered);
+
+  const onDelete = useCallback(
+    function (id) {
+      const remainingComments = commentsFiltered.filter(
+        (comment) => comment.id !== id
+      );
+      setCommentsFiltered(remainingComments);
+    },
+    [commentsFiltered]
+  );
+
+  return renderCommentsTree(commentsTree, onDelete);
 }

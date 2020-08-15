@@ -8,9 +8,11 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "date-fns": "^2.15.0",
     "emotion-reset": "^2.0.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-query": "^2.5.14",
     "react-scripts": "3.4.3"
   },
   "scripts": {

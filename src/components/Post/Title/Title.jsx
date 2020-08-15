@@ -1,18 +1,17 @@
 import React from "react";
 
 import { Container, SubRedditTitle, Grid, Score, Title } from "./Title.styles";
+import { formatNumberToK } from "../../../utils/ui";
 
-export default function () {
+export default function ({ subRedditTitle, score, title }) {
   return (
     <Container>
       <div>
-        <SubRedditTitle>r/unpopularopinion</SubRedditTitle>
+        <SubRedditTitle>{subRedditTitle}</SubRedditTitle>
       </div>
       <Grid>
-        <Score>20.7k</Score>
-        <Title>
-          Taking showers with your socks on is so much better than not
-        </Title>
+        <Score>{formatNumberToK(score)}</Score>
+        <Title>{title}</Title>
       </Grid>
     </Container>
   );

@@ -9,13 +9,10 @@ import { spacingStyles, textStyles } from "../Body/Body.styles";
 export const Container = styled.div`
   padding-top: ${px2rem(10)};
   display: grid;
-  row-gap: ${px2rem(20)};
 `;
 
 export const Comment = styled.div`
   ${spacingStyles};
-  padding-top: 0;
-  padding-bottom: 0;
   display: grid;
   row-gap: ${px2rem(8)};
   ${({ depth }) => {
@@ -26,6 +23,10 @@ export const Comment = styled.div`
       `;
     }
   }}
+
+  &:last-child {
+    padding-bottom: 0;
+  }
 `;
 
 export const CommentMeta = styled.div`
@@ -41,11 +42,23 @@ export const CommentMeta = styled.div`
 `;
 
 export const StyledDeleteIcon = styled(DeleteIcon)`
-  width: ${px2rem(8)};
-  height: ${px2rem(8)};
+  width: ${px2rem(12)};
+  height: ${px2rem(12)};
+`;
+
+export const DeleteButton = styled.button`
   fill: ${COLORS.GRAY_400};
+
+  &:hover {
+    fill: ${COLORS.GRAY_300};
+  }
 `;
 
 export const CommentText = styled.p`
   ${textStyles};
+
+  .md {
+    display: grid;
+    row-gap: ${px2rem(8)};
+  }
 `;
