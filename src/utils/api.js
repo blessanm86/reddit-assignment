@@ -1,3 +1,4 @@
-export function fetchAndParse(url) {
-  return fetch(url).then((res) => res.json());
+export async function fetchAndParse(url) {
+  const response = await fetch(url);
+  return await response.json();
 }

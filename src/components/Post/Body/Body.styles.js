@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
 
-import px2rem from "../../../utils/styles";
+import { px2rem } from "../../../utils/styles";
 import { COLORS } from "../../../config/styles";
 import CommentIcon from "../../../assets/icons/Comment";
 

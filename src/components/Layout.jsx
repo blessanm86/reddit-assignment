@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Global, css } from "@emotion/core";
 import emotionReset from "emotion-reset";
 
-import px2rem from "../utils/styles";
+import { px2rem } from "../utils/styles";
 import { COLORS } from "../config/styles";
 
 const globalStyles = css`

@@ -36,6 +36,20 @@ export function getTimeDifferenceFromNowInWords(timestamp) {
 }
 
 export function convertStringToHtml(str) {
-  const parser = new DOMParser();
-  return parser.parseFromString(str, "text/html").body.childNodes[0].nodeValue;
+  return new DOMParser().parseFromString(str, "text/html").body.childNodes[0]
+    .nodeValue;
+}
+
+export function pluralize(count, singular, plural) {
+  const pluralRules = new Intl.PluralRules("en-US");
+  const selection = pluralRules.select(count);
+
+  switch (selection) {
+    case "one": {
+      return singular;
+    }
+    default: {
+      return plural;
+    }
+  }
 }

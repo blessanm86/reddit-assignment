@@ -13,6 +13,7 @@ import {
   convertCommentsToTree,
   getTimeDifferenceFromNowInWords,
   convertStringToHtml,
+  pluralize,
 } from "../../../utils/ui";
 
 function renderCommentsTree(comments, onDelete) {
@@ -33,8 +34,13 @@ function renderCommentsTree(comments, onDelete) {
             <CommentMeta>
               <a href={permalink}>{author}</a>
               <span>
-                {formatNumberToK(ups)} points -{" "}
-                {getTimeDifferenceFromNowInWords(created_utc * 1000)} ago
+                {`${formatNumberToK(ups)} ${pluralize(
+                  ups,
+                  "point",
+                  "points"
+                )} - ${getTimeDifferenceFromNowInWords(
+                  created_utc * 1000
+                )} ago`}
               </span>
               <DeleteButton
                 onClick={() => {

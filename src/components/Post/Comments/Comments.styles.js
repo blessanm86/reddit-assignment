@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
 
-import px2rem from "../../../utils/styles";
+import { px2rem } from "../../../utils/styles";
 import { COLORS } from "../../../config/styles";
 import DeleteIcon from "../../../assets/icons/Delete";
 import { spacingStyles, textStyles } from "../Body/Body.styles";

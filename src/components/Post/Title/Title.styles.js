@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import px2rem from "../../../utils/styles";
+import { px2rem } from "../../../utils/styles";
 import { COLORS } from "../../../config/styles";
 
 export const Container = styled.div`
