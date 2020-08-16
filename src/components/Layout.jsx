@@ -14,7 +14,6 @@ const globalStyles = css`
   }
 
   body {
-    margin: 0 calc(100vw - 100%);
     background: ${COLORS.GRAY_100};
     font-family: arial;
     -webkit-font-smoothing: antialiased;
@@ -31,6 +30,7 @@ const globalStyles = css`
     cursor: pointer;
     padding: 0;
     margin: 0;
+    outline: none;
   }
 `;
 
