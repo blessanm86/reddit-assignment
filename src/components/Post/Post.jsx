@@ -11,7 +11,12 @@ export default function Post({ id }) {
   if (isLoading)
     return <p data-testid="loading-element">Loading the post...</p>;
 
-  if (error) return "An error has occurred: " + error.message;
+  if (error)
+    return (
+      <p data-testid="error-element">
+        {`An error has occurred: ${error.message}`}
+      </p>
+    );
 
   const {
     subreddit_name_prefixed,
@@ -22,7 +27,7 @@ export default function Post({ id }) {
   } = post;
 
   return (
-    <>
+    <article data-testid="post-element">
       <Title
         subRedditTitle={subreddit_name_prefixed}
         score={score}
@@ -31,6 +36,6 @@ export default function Post({ id }) {
       <Body body={selftext_html} commentsCount={comments.length}>
         <Comments comments={comments} />
       </Body>
-    </>
+    </article>
   );
 }

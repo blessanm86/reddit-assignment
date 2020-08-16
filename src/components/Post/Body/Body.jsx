@@ -19,7 +19,10 @@ export default function ({ body, commentsCount, children }) {
             __html: convertStringToHtml(body),
           }}
         ></p>
-        <button onClick={() => setShouldShowComments(!shouldShowComments)}>
+        <button
+          aria-label="Toggle Comments"
+          onClick={() => setShouldShowComments(!shouldShowComments)}
+        >
           <CommentsCount>
             <StyledCommentIcon />
             <span>{commentsCount} Comments</span>

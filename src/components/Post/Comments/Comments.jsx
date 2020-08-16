@@ -32,7 +32,9 @@ function renderCommentsTree(comments, onDelete) {
         }) => (
           <Comment depth={depth} key={id}>
             <CommentMeta>
-              <a href={permalink}>{author}</a>
+              <a aria-label="Link to Comment" href={permalink}>
+                {author}
+              </a>
               <span>
                 {`${formatNumberToK(ups)} ${pluralize(
                   ups,
@@ -43,6 +45,7 @@ function renderCommentsTree(comments, onDelete) {
                 )} ago`}
               </span>
               <DeleteButton
+                aria-label="Delete Comment"
                 onClick={() => {
                   onDelete(id);
                 }}
@@ -77,5 +80,9 @@ export default function Comments({ comments }) {
     [commentsFiltered]
   );
 
-  return renderCommentsTree(commentsTree, onDelete);
+  return (
+    <div data-testid="comments-element">
+      {renderCommentsTree(commentsTree, onDelete)}
+    </div>
+  );
 }
