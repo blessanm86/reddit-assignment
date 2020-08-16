@@ -8,7 +8,8 @@ import usePost from "../../hooks/usePost";
 export default function Post({ id }) {
   const { isLoading, error, data: post } = usePost(id);
 
-  if (isLoading) return "Loading the post...";
+  if (isLoading)
+    return <p data-testid="loading-element">Loading the post...</p>;
 
   if (error) return "An error has occurred: " + error.message;
 

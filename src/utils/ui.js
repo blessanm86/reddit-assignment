@@ -2,9 +2,17 @@ import formatDistanceStrict from "date-fns/formatDistanceStrict";
 
 export function formatNumberToK(number) {
   if (number < 1000) {
-    return number;
+    return `${number}`;
   }
-  return `${(number / 1000).toFixed(1)}k`;
+
+  const result = number / 1000;
+  const resultRounded = Math.round(result);
+
+  if (result === resultRounded) {
+    return `${result}k`;
+  }
+
+  return `${result.toFixed(1)}k`;
 }
 
 export function convertCommentsToTree(comments) {
@@ -14,7 +22,7 @@ export function convertCommentsToTree(comments) {
     return acc;
   }, {});
 
-  let tree = [];
+  const sortedParentIds = new Set();
 
   for (let comment of comments) {
     if (comment.parent_id) {
@@ -23,12 +31,21 @@ export function convertCommentsToTree(comments) {
       if (commentsMap[comment.parent_id]) {
         commentsMap[comment.parent_id].children.push(comment);
       }
+
+      let node = comment;
+      while (node.parent_id) {
+        node = commentsMap[node.parent_id];
+        if (!node) {
+          break;
+        }
+      }
+      node && sortedParentIds.add(node.id);
     } else {
-      tree.push(comment);
+      sortedParentIds.add(comment.id);
     }
   }
 
-  return tree;
+  return [...sortedParentIds].map((id) => commentsMap[id]);
 }
 
 export function getTimeDifferenceFromNowInWords(timestamp) {

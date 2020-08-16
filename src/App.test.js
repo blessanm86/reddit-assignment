@@ -1,9 +1,9 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test("When a post is being fetched, then show a loading element", () => {
+  const { getByTestId } = render(<App />);
+  const loadingElement = getByTestId("loading-element");
+  expect(loadingElement).toBeInTheDocument();
 });
