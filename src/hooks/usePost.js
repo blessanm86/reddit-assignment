@@ -7,7 +7,7 @@ export default function usePost(id) {
   //Hard coding gist id instead post id
   id = "6a4dca9067ad7a296204e7c9ecd977b0";
 
-  return useQuery(`postData.${id}`, async () => {
+  return useQuery(["post", id], async () => {
     const gist = await fetchAndParse(`${POST_API_URL}/${id}`);
     return JSON.parse(gist.files["unpopularopinion-dataset.json"].content);
   });
