@@ -9,7 +9,7 @@ export const spacingStyles = css`
   padding: ${px2rem([20, 40])};
 
   @media (max-width: 768px) {
-    padding: ${px2rem([10, 20])};
+    padding: ${px2rem([10, 0, 10, 20])};
   }
 `;
 
