@@ -79,5 +79,6 @@ test("When comment is deleted, then delete it and its children", async () => {
   const deleteCommentsButton = getByTestId("delete-comment-t1_f369ye5");
   fireEvent.click(deleteCommentsButton);
   commentsButton = getByText(/14 Comments/);
+  expect(deleteCommentsButton).not.toBeInTheDocument();
   expect(commentsButton).toBeInTheDocument();
 });
