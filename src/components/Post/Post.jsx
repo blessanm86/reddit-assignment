@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 
+import Loader from "../Loader";
+import Error from "../Error";
 import Title from "./Title";
 import Body from "./Body";
 import Comments from "./Comments";
@@ -27,15 +29,11 @@ export default function Post({ id }) {
   );
 
   if (isLoading) {
-    return <p data-testid="loading-element">Loading the post...</p>;
+    return <Loader />;
   }
 
   if (error) {
-    return (
-      <p data-testid="error-element">
-        {`An error has occurred: ${error.message}`}
-      </p>
-    );
+    return <Error error={error} />;
   }
 
   const { subreddit_name_prefixed, score, title, selftext_html } = post;
