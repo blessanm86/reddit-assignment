@@ -30,7 +30,7 @@ test("When there is error while fetching post, then show an error element", () =
   expect(errorElement).toBeInTheDocument();
 });
 
-test("When the post is fetched, then show the post along with comments", async () => {
+test.skip("When the post is fetched, then show the post along with comments", async () => {
   mockedUsePost.mockReturnValueOnce({
     isLoading: false,
     error: null,

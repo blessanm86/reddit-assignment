@@ -27,18 +27,24 @@ describe("convertCommentsToTree", () => {
   });
 
   it("Should convert an array into tree", () => {
-    expect(convertCommentsToTree(comments)).toEqual(tree);
+    const { tree: receivedTree, nodeCount } = convertCommentsToTree(comments);
+    expect(receivedTree).toEqual(tree);
+    expect(nodeCount).toBe(5);
   });
 
   it("Should ignore child comments if parent comment is deleted when converting to tree", () => {
     //delete second comment in list
     comments.splice(1, 1);
-    expect(convertCommentsToTree(comments)).toEqual(treeWithDeletedChildren);
+    const { tree: receivedTree, nodeCount } = convertCommentsToTree(comments);
+    expect(receivedTree).toEqual(treeWithDeletedChildren);
+    expect(nodeCount).toBe(2);
   });
 
   it("Should respect the sort order when converting to tree", () => {
     comments.sort((a, b) => b.created_utc - a.created_utc);
-    expect(convertCommentsToTree(comments)).toEqual(treeWithSortedChildren);
+    const { tree: receivedTree, nodeCount } = convertCommentsToTree(comments);
+    expect(receivedTree).toEqual(treeWithSortedChildren);
+    expect(nodeCount).toBe(5);
   });
 });
 

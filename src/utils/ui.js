@@ -16,6 +16,8 @@ export function formatNumberToK(number) {
 }
 
 export function convertCommentsToTree(comments) {
+  let nodeCount = 0;
+
   const commentsMap = comments.reduce((acc, comment) => {
     comment.children = [];
     acc[comment.id] = comment;
@@ -35,17 +37,23 @@ export function convertCommentsToTree(comments) {
       let node = comment;
       while (node.parent_id) {
         node = commentsMap[node.parent_id];
+        //means parent was deleted
         if (!node) {
           break;
         }
       }
-      node && sortedParentIds.add(node.id);
+      if (node) {
+        nodeCount++;
+        sortedParentIds.add(node.id);
+      }
     } else {
       sortedParentIds.add(comment.id);
     }
   }
 
-  return [...sortedParentIds].map((id) => commentsMap[id]);
+  const sortedParentIdsArray = Array.from(sortedParentIds);
+  nodeCount += sortedParentIdsArray.length;
+  return { tree: sortedParentIdsArray.map((id) => commentsMap[id]), nodeCount };
 }
 
 export function getTimeDifferenceFromNowInWords(timestamp) {

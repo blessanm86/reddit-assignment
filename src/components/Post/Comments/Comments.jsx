@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 
 import {
   Container,
@@ -10,7 +10,6 @@ import {
 } from "./Comments.styles";
 import {
   formatNumberToK,
-  convertCommentsToTree,
   getTimeDifferenceFromNowInWords,
   convertStringToHtml,
   pluralize,
@@ -66,23 +65,10 @@ function renderCommentsTree(comments, onDelete) {
   );
 }
 
-export default function Comments({ comments }) {
-  const [commentsFiltered, setCommentsFiltered] = useState(comments);
-  const commentsTree = convertCommentsToTree(commentsFiltered);
-
-  const onDelete = useCallback(
-    function (id) {
-      const remainingComments = commentsFiltered.filter(
-        (comment) => comment.id !== id
-      );
-      setCommentsFiltered(remainingComments);
-    },
-    [commentsFiltered]
-  );
-
+export default function Comments({ comments, onDelete }) {
   return (
     <div data-testid="comments-element">
-      {renderCommentsTree(commentsTree, onDelete)}
+      {renderCommentsTree(comments, onDelete)}
     </div>
   );
 }
