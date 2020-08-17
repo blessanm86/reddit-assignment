@@ -26,3 +26,4 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 3. The app is responsive but the UX is not fully optimized for mobile.
 4. Uses [react-query](https://react-query.tanstack.com/) as a server state management library.
 5. Uses [date-fns](https://date-fns.org/) to calculate the comment time difference.
+6. Uses Github public api which is rate limited to 60 calls/hr.
