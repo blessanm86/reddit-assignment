@@ -7,7 +7,7 @@ import App from "./App";
 jest.mock("./hooks/usePost");
 
 test("When a post is being fetched, then show a loading element", () => {
-  mockedUsePost.mockReturnValueOnce({
+  mockedUsePost.mockReturnValue({
     isLoading: true,
     error: null,
     data: null,
@@ -19,7 +19,7 @@ test("When a post is being fetched, then show a loading element", () => {
 });
 
 test("When there is error while fetching post, then show an error element", () => {
-  mockedUsePost.mockReturnValueOnce({
+  mockedUsePost.mockReturnValue({
     isLoading: false,
     error: new Error("Simulated Error"),
     data: null,
@@ -30,8 +30,8 @@ test("When there is error while fetching post, then show an error element", () =
   expect(errorElement).toBeInTheDocument();
 });
 
-test.skip("When the post is fetched, then show the post along with comments", async () => {
-  mockedUsePost.mockReturnValueOnce({
+test("When the post is fetched, then show the post along with comments", async () => {
+  mockedUsePost.mockReturnValue({
     isLoading: false,
     error: null,
     data: postFixture,
