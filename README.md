@@ -1,7 +1,8 @@
 # reddit-assignment
 
 An assignment that clones the reddit post and comments page.
-[\*\*Click here to view the demo](https://adb-reddit-assignment.netlify.app/)
+
+[Click here to view the demo](https://adb-reddit-assignment.netlify.app/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
