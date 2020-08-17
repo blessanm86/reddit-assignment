@@ -28,3 +28,4 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 4. Uses [react-query](https://react-query.tanstack.com/) as a server state management library.
 5. Uses [date-fns](https://date-fns.org/) to calculate the comment time difference.
 6. Uses Github public api which is rate limited to 60 calls/hr.
+7. Comments will be refetched on window focus. This is the default behaviour of `react-query`.
