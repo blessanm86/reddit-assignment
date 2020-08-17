@@ -45,6 +45,7 @@ function renderCommentsTree(comments, onDelete) {
               </span>
               <DeleteButton
                 aria-label="Delete Comment"
+                data-testid={`delete-comment-${id}`}
                 onClick={() => {
                   onDelete(id);
                 }}

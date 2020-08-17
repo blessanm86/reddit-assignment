@@ -36,20 +36,48 @@ test("When the post is fetched, then show the post along with comments", async (
     error: null,
     data: postFixture,
   });
-  const { getByTestId, getByLabelText } = render(<App />);
+  const { getByTestId } = render(<App />);
 
   const postElement = getByTestId("post-element");
   expect(postElement).toBeInTheDocument();
+});
 
-  const commentsElement = getByTestId("comments-element");
+test("When post is rendered and comments button is clicked, then toggle the comments", async () => {
+  mockedUsePost.mockReturnValue({
+    isLoading: false,
+    error: null,
+    data: postFixture,
+  });
+  const { getByTestId, getByLabelText } = render(<App />);
+
+  let commentsElement = getByTestId("comments-element");
   const toggleCommentsButton = getByLabelText(/Toggle Comments/i);
   expect(commentsElement).toBeInTheDocument();
 
   //hide the comments
   fireEvent.click(toggleCommentsButton);
-  await wait(() => expect(commentsElement).not.toBeInTheDocument());
+  expect(commentsElement).not.toBeInTheDocument();
 
   //show the comments again
   fireEvent.click(toggleCommentsButton);
-  await wait(() => expect(getByTestId("comments-element")).toBeInTheDocument());
+  commentsElement = getByTestId("comments-element");
+  expect(commentsElement).toBeInTheDocument();
+});
+
+test("When comment is deleted, then delete it and its children", async () => {
+  mockedUsePost.mockReturnValue({
+    isLoading: false,
+    error: null,
+    data: postFixture,
+  });
+  const { getByTestId, getByText } = render(<App />);
+
+  //Look for comments button with comment count
+  let commentsButton = getByText(/16 Comments/);
+  expect(commentsButton).toBeInTheDocument();
+
+  const deleteCommentsButton = getByTestId("delete-comment-t1_f369ye5");
+  fireEvent.click(deleteCommentsButton);
+  commentsButton = getByText(/14 Comments/);
+  expect(commentsButton).toBeInTheDocument();
 });
